@@ -28,8 +28,8 @@ var intent = [
   {"q": "hey", "a": "Hi, I'm Robot. Can I help you?"},
   {"q": "hi", "a": "Hi, I'm Robot. Can I help you?"},
   {"q": "hello", "a": "Hi, I'm Robot. Can I help you?"},
-  {"q": "how old are you", "a": "I'm fine. Thanks you!"},
-  {"q": "how are you", "a": "I was born a few days ago :)"}
+  {"q": "how are you", "a": "I'm fine. Thanks you!"},
+  {"q": "how old are you", "a": "I was born a few days ago :)"}
 ];
 
 app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
