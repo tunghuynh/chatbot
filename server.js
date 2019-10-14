@@ -74,6 +74,7 @@ function findIntent(s1){
   let maxIntent = "";
   intent.forEach(function(item){
     let rate = similarity(s1, item.q);
+    console.log(s1, item.q, rate);
     if (rate>maxMatchRate){
       maxMatchRate = rate;
       maxIntent = item.a;
@@ -82,7 +83,7 @@ function findIntent(s1){
   if (maxMatchRate>=0.7){
     return maxIntent;
   }
-  return "https://www.google.com/search?q="+s1;
+  return "I don't understand, I think this will help you: https://www.google.com/search?q="+s1;
 }
 
 function similarity(s1, s2) {
