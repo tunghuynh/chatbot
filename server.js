@@ -26,9 +26,9 @@ app.get('/webhook', function(req, res) { // Đây là path để validate tooken
 
 app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
 console.log("=============================RECEIVE=============================");
-
+console.log(req.body);
   var entries = req.body.entry;
-  console.log(entries);
+  //console.log(entries);
   for (var entry of entries) {
     var messaging = entry.messaging;
     for (var message of messaging) {
