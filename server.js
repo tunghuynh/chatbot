@@ -8,7 +8,7 @@ var express = require('express');
 
 var app = express();
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 var server = http.createServer(app);
 var request = require("request");
