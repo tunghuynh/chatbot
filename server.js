@@ -1,6 +1,6 @@
 const APP_SECRET = '85f7c0dc3ce2ef2fbbddaf153dda08bf';
 const VALIDATION_TOKEN = 'TungHuynhToken';
-const PAGE_ACCESS_TOKEN = 'EAADLFjjtKsMBALv7RQnNbBBybZBNVnVqvY2O9E7X5YPQiey8Izf0Ye6ZCd4aw7NlEsZB6nuy8cqReUMvkhUlhZCrp1gKox69fLrjAAJOybiaOzF0xjsICaghFBgYG9HTR8793FwbwrzxHL7IJcuP3rZCNl3qaZAuNYsCLy2VZAdj80GgPagXdK0uHaSejDV60MZD';
+const PAGE_ACCESS_TOKEN = 'EAADLFjjtKsMBAN5vPZApPz7dmH7OuPnZAQXuo9U7hEhJYhJmZBw5MgCwV01BVbg9yiJ1zV6Mj5961MN3WQQcA1u1GitLBVepgfozs7IjOGZB2qdLGcvWNGTlSaR8QVagTMZCLWUVk6vxvX0M3WXNli4PSl69hrv4M3hzEc1VqULE0shpNT3dAaF09J3LneHkZD';
 
 var http = require('http');
 var bodyParser = require('body-parser');
@@ -25,7 +25,10 @@ app.get('/webhook', function(req, res) { // Đây là path để validate tooken
 });
 
 app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
+console.log("=============================RECEIVE=============================");
+console.log(req);
   var entries = req.body.entry;
+  console.log(entries);
   for (var entry of entries) {
     var messaging = entry.messaging;
     for (var message of messaging) {
