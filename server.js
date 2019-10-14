@@ -22,11 +22,18 @@ app.get('/webhook', function(req, res) { // Đây là path để validate tooken
  // res.send('Error, wrong validation token');
 });
 
-app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
-console.log("=============================RECEIVE=============================");
+var intent = [
+  {"q": "what your name", "a": "My name is Robot"},
+  {"q": "alo", "a": "Hi, I'm Robot. Can I help you?"},
+  {"q": "hey", "a": "Hi, I'm Robot. Can I help you?"},
+  {"q": "hi", "a": "Hi, I'm Robot. Can I help you?"},
+  {"q": "hello", "a": "Hi, I'm Robot. Can I help you?"},
+  {"q": "how old are you", "a": "I'm fine. Thanks you!"},
+  {"q": "how are you", "a": "I was born a few days ago :)"}
+];
 
+app.post('/webhook', function(req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
   var entries = req.body.entry;
-  console.log(entries);
   for (var entry of entries) {
     var messaging = entry.messaging;
     for (var message of messaging) {
@@ -34,7 +41,8 @@ console.log("=============================RECEIVE=============================")
       if (message.message) {
         if (message.message.text) {
           var text = message.message.text;
-          sendMessage(senderId, "Hello!! I'm a bot. Your message: " + text);
+          var ans = findIntent(text);
+          sendMessage(senderId, ans);
         }
       }
     }
@@ -59,6 +67,63 @@ function sendMessage(senderId, message) {
       },
     }
   });
+}
+
+function findIntent(s1){
+  let maxMatchRate = 0;
+  let maxIntent = "";
+  intent.forEach(function(item){
+    let rate = similarity(s1, item.q);
+    if (rate>maxMatchRate){
+      maxMatchRate = rate;
+      maxIntent = item.a;
+    }
+  });
+  if (maxMatchRate>=0.7){
+    return maxIntent;
+  }
+  return "https://www.google.com/search?q="+s1;
+}
+
+function similarity(s1, s2) {
+  var longer = s1;
+  var shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  var longerLength = longer.length;
+  if (longerLength == 0) {
+    return 1.0;
+  }
+  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  var costs = new Array();
+  for (var i = 0; i <= s1.length; i++) {
+    var lastValue = i;
+    for (var j = 0; j <= s2.length; j++) {
+      if (i == 0)
+        costs[j] = j;
+      else {
+        if (j > 0) {
+          var newValue = costs[j - 1];
+          if (s1.charAt(i - 1) != s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue),
+              costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+    }
+    if (i > 0)
+      costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
 }
 
 app.set('port', process.env.PORT || 5000);
