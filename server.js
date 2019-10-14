@@ -1,6 +1,6 @@
 const APP_SECRET = '85f7c0dc3ce2ef2fbbddaf153dda08bf';
 const VALIDATION_TOKEN = 'TungHuynhToken';
-const PAGE_ACCESS_TOKEN = 'EAADLFjjtKsMBAC4RESm2XCRl2DNBkx4o9P0FcyiIpPBL3Gi3riiDHShAnYtgJYnhfBMzqrzSURebBxY7ZABFWZCenm6QO7rRUJBAlj6n64nd7brUBpANaYf59fmwufGgHe5oBFIopCsnYQCCNdlI4DV1KZB7YQ5G3dNkBUygiKPeq3MYswZBiMtizuKvAGEZD';
+const PAGE_ACCESS_TOKEN = 'EAADLFjjtKsMBADaSf8ByMrfPDzpAKzO8L77ttPRFrHlKQ30wypcNyei1dqUzcPXFyBw7ugRdrVkyDErNZBOU7Fm2fW12P7BaVprGfSCYIN5XhIbdWOg0pPsMoy8fEHxvy01lpEMAIwedPfxRlUf7HrYRpkUcSDX3k3ZAgmcTfeoZCpcSzhPH9cIMjC55zwZD';
 
 var http = require('http');
 var bodyParser = require('body-parser');
